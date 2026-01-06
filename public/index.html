@@ -5,6 +5,54 @@
     <title>Universe Label</title>
 </head>
 <body>
-<div class="label"></div>
+<div class="labelWrap">
+    <!-- 边框层开始 -->
+    <div class="borderLayer">
+        <!-- 上边框 -->
+        <div class="seg topLine"></div>
+        
+        <!-- 下边框 -->
+        <div class="seg bottomLine"></div>
+        
+        <!-- 右边框 -->
+        <div class="seg rightBar"></div>
+        
+        <!-- 左边框轨道区域开始 -->
+        <div class="leftRail">
+            <!-- 左上边框 -->
+            <div class="seg leftTop"></div>
+            <!-- 左中边框 -->
+            <div class="seg leftMid"></div>
+            <!-- 左下边框 -->
+            <div class="seg leftBottom"></div>
+        </div>
+        <!-- 左边框轨道区域结束 -->
+    </div>
+    <!-- 边框层结束 -->
+    
+    <!-- 装饰件层开始 -->
+    <div class="decorLayer">
+        <!-- 左侧小矩形开始 -->
+        <div class="seg rectangle"></div>
+        <!-- 左侧小矩形结束 -->
+    </div>
+    <!-- 装饰件层结束 -->
+    
+    <!-- 内容层开始 -->
+    <div class="contentLayer">
+        <!-- 占位内容 用于观察padding和边框遮挡关系 -->
+        <div class="content">
+            <b>Layer B</b>: 只做边框骨架(6个贴片)
+            <br/>
+            尺寸: 426 * 286
+            <br/>
+            左边: 3px(0-162) / 1px(162-215) / 3px(215-286)
+            <br/>
+            上下: 1px,右: 6px
+            <br/>
+        </div>
+    </div>
+    <!-- 内容层结束 -->
+</div>
 </body>
 </html>

@@ -1,0 +1,61 @@
+.seg {
+    position: absolute;
+    background: var(--border);
+}
+
+.borderLayer .topLine {
+    top: 0;
+    /* Tips: 同时设置了right和left,则元素在水平方向上会被自动拉伸,此时不要设置width */
+    right: 0;
+    left: 0;
+    height: 1px;
+}
+
+.borderLayer .bottomLine {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+}
+
+.borderLayer .rightBar {
+    /* Tips: 同理,同时设置了top和bottom,则元素在垂直方向上也会被自动拉伸,此时不要设置height */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 6px;
+}
+
+.borderLayer .leftRail {
+    /*
+    leftRail只是为了组织左上/中/下3个不同粗细的边框,左边框内部允许用leftRail
+    作为"局部坐标系"(被设置了绝对定位的子元素,其定位参照物即为最近的已定位祖先元素),
+    来确定位置 */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+}
+
+.borderLayer .leftRail .leftTop {
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 162px;
+}
+
+.borderLayer .leftRail .leftMid {
+    top: 162px;
+    /* 细线是在粗线内侧的 */
+    right: 0;
+    width: 1px;
+    height: 53px;
+}
+
+.borderLayer .leftRail .leftBottom {
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    height: 71px;
+}

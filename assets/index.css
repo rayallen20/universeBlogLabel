@@ -4,9 +4,70 @@
     box-sizing: border-box;
 }
 
-.label {
-    margin: 100px auto;
-    border: 1px solid #000;
-    width: 400px;
-    height: 300px;
+:root {
+    --w: 426px;
+    --h: 286px;
+
+    /* 纯色阶段: 先用统一色,后面再换成设计稿中的颜色体系 */
+    --bg: #0d1117;
+    --border: #20c6d8;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: #05070a;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "PingFang SC", "Microsoft YaHei";
+    overflow: hidden;
+}
+
+.labelWrap {
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 426px;
+    height: 286px;
+    position: fixed;
+    background: var(--bg);
+    /* 纯色阶段不做圆角(似乎设计稿里也没有圆角) */
+    border-radius: 0;
+    /* 为了观察贴片是否生效给label加一个外边框,后续删除 */
+    /*outline: 1px solid rgba(255, 255, 255, 1);*/
+}
+
+.borderLayer,
+.decorLayer,
+.contentLayer {
+    position: absolute;
+    /* inset属性就是top/right/bottom/left的简写 */
+    /* 3层均铺满Wrap */
+    inset: 0;
+}
+
+.borderLayer {
+    /* 边框层最靠上,若边框覆盖了内容,则说明该调整内容的padding了 */
+    z-index: 30;
+}
+
+.decorLayer {
+    /* 装饰层在边框层下方,可以被边框遮挡,但不可以遮挡内容,若装饰层覆盖了内容,则说明该调整内容的padding了 */
+    z-index: 20;
+}
+
+.contentLayer {
+    /* 内容层在最下方,不会被边框和装饰遮挡,若遮挡则调整padding */
+    z-index: 10;
+}
+
+/* 内容 (占位用, 后面再做step2) */
+.contentLayer .content {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: 12px;
+    bottom: 12px;
+    color: rgba(255,255,255,0.65);
+    font-size: 12px;
+    line-height: 1.5;
+    pointer-events: none;
 }
