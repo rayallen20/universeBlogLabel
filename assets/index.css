@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.label {
+    margin: 100px auto;
+    border: 1px solid #000;
+    width: 400px;
+    height: 300px;
+}
