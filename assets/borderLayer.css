@@ -3,12 +3,22 @@
     background: var(--border);
 }
 
-.borderLayer .topLine {
+.borderLayer .topSystem {
+    position: absolute;
     top: 0;
-    /* Tips: 同时设置了right和left,则元素在水平方向上会被自动拉伸,此时不要设置width */
-    right: 0;
     left: 0;
-    height: 1px;
+    right: 0;
+
+    /* 需要容纳向下折的 16px */
+    height: 17px;
+
+    pointer-events: none; /* overlay 场景避免挡交互 */
+}
+
+.borderLayer .topSvg {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .borderLayer .bottomLine {

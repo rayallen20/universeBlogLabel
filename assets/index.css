@@ -11,6 +11,11 @@
     /* 纯色阶段: 先用统一色,后面再换成设计稿中的颜色体系 */
     --bg: #0d1117;
     --border: #20c6d8;
+
+    /* fold距左侧距离 */
+    --fold-x: 60px;
+    /* fold宽度 */
+    --fold-w: 306px;
 }
 
 body {
@@ -33,6 +38,28 @@ body {
     border-radius: 0;
     /* 为了观察贴片是否生效给label加一个外边框,后续删除 */
     /*outline: 1px solid rgba(255, 255, 255, 1);*/
+
+    -webkit-clip-path: polygon(
+            0px 0px,          /* 左上 */
+            60px 0px,         /* 到 foldStartX */
+            76px 16px,        /* 左斜下点 (60+16, 16) */
+            350px 16px,       /* 底部水平到 (366-16, 16) */
+            366px 0px,        /* 右斜上回到顶部 */
+            426px 0px,        /* 右上 */
+            426px 286px,      /* 右下 */
+            0px 286px         /* 左下 */
+    );
+
+    clip-path: polygon(
+            0px 0px,
+            60px 0px,
+            76px 16px,
+            350px 16px,
+            366px 0px,
+            426px 0px,
+            426px 286px,
+            0px 286px
+    );
 }
 
 .borderLayer,
@@ -46,7 +73,7 @@ body {
 
 .borderLayer {
     /* 边框层最靠上,若边框覆盖了内容,则说明该调整内容的padding了 */
-    z-index: 30;
+    z-index: 10;
 }
 
 .decorLayer {
@@ -56,7 +83,7 @@ body {
 
 .contentLayer {
     /* 内容层在最下方,不会被边框和装饰遮挡,若遮挡则调整padding */
-    z-index: 10;
+    z-index: 30;
 }
 
 /* 内容 (占位用, 后面再做step2) */
@@ -64,7 +91,7 @@ body {
     position: absolute;
     left: 12px;
     right: 12px;
-    top: 12px;
+    top: 40px;
     bottom: 12px;
     color: rgba(255,255,255,0.65);
     font-size: 12px;
