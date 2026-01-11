@@ -1,5 +1,5 @@
 .outerDecorLayer .rectangle {
-    top: 163px;
+    top: calc(var(--leftRail-top-height) + 1px);
     /* Tips: 这里给边框设置left: 0,给小矩形设置left: -3px,是为了统一坐标系,以边框为x = 0处 */
     left: -3px;
     width: 4px;
