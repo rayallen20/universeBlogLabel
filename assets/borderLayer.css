@@ -21,11 +21,19 @@
     height: 100%;
 }
 
-.borderLayer .bottomLine {
+.borderLayer .bottomSystem {
+    position: absolute;
+    left: 0;
     right: 0;
     bottom: 0;
-    left: 0;
-    height: 1px;
+    height: 17px;
+    pointer-events: none;
+}
+
+.borderLayer .bottomSvg {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .borderLayer .rightBar {
@@ -45,27 +53,27 @@
     top: 0;
     bottom: 0;
     left: 0;
-    width: 3px;
+    width: var(--leftRail-width);
 }
 
 .borderLayer .leftRail .leftTop {
     top: 0;
     left: 0;
-    width: 3px;
-    height: 162px;
+    width: var(--leftRail-top-width);
+    height: var(--leftRail-top-height);
 }
 
 .borderLayer .leftRail .leftMid {
     top: 162px;
     /* 细线是在粗线内侧的 */
     right: 0;
-    width: 1px;
-    height: 53px;
+    width: var(--leftRail-middle-width);
+    height: var(--leftRail-middle-height);
 }
 
 .borderLayer .leftRail .leftBottom {
     bottom: 0;
     left: 0;
-    width: 3px;
-    height: 71px;
+    width: var(--leftRail-bottom-width);
+    height: var(--leftRail-bottom-height);
 }

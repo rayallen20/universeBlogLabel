@@ -6,109 +6,185 @@
 </head>
 <body>
 <div class="labelWrap">
-    <!-- 边框层开始 -->
-    <div class="borderLayer">
-        <!-- 上边框容器区域开始 -->
-        <!-- 顶部线系统（SVG，一次画完：topLeft + fold(3段) + topRight） -->
-        <div class="topSystem">
-            <svg class="topSvg" viewBox="0 0 426 17" preserveAspectRatio="none">
-                <defs>
-                    <!-- 可选: 顶部暗带fill -->
-                    <linearGradient id="bgGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="426" y2="0">
-                        <stop offset="0%" stop-color="rgb(5,9,18)" stop-opacity="0.90"/>
-                        <stop offset="49.98%" stop-color="rgb(5,9,18)" stop-opacity="0.40"/>
-                        <stop offset="99.97%" stop-color="rgb(5,9,18)" stop-opacity="0.90"/>
-                    </linearGradient>
+    <!-- 裁剪区域开始 -->
+    <div class="labelShape">
+        <!-- 边框层开始 -->
+        <div class="borderLayer">
+            <!-- 顶部线系统开始 -->
+            <div class="topSystem">
+                <!-- SVG: 一次画完 topLeft + fold(3段) + topRight) -->
+                <svg class="topSvg" viewBox="0 0 426 17" preserveAspectRatio="none">
+                    <defs>
+                        <!-- 可选: 顶部暗带fill -->
+                        <linearGradient id="bgGradTop" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="426" y2="0">
+                            <stop offset="0%" stop-color="rgb(5,9,18)" stop-opacity="0.90"/>
+                            <stop offset="49.98%" stop-color="rgb(5,9,18)" stop-opacity="0.40"/>
+                            <stop offset="99.97%" stop-color="rgb(5,9,18)" stop-opacity="0.90"/>
+                        </linearGradient>
+                        
+                        <!-- 重点: 线条stroke的 "亮 -> 暗 -> 亮" -->
+                        <linearGradient id="strokeGradTop" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="426" y2="0">
+                            <stop offset="0%" stop-color="#51BCFF" stop-opacity="1"/>
+                            <stop offset="49.98%" stop-color="#51BCFF" stop-opacity="0.1"/>
+                            <stop offset="99.97%" stop-color="#51BCFF" stop-opacity="1"/>
+                        </linearGradient>
+                    </defs>
                     
-                    <!-- 重点: 线条stroke的 "亮 -> 暗 -> 亮" -->
-                    <linearGradient id="strokeGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="426" y2="0">
-                        <stop offset="0%" stop-color="#51BCFF" stop-opacity="1"/>
-                        <stop offset="49.98%" stop-color="#51BCFF" stop-opacity="0.1"/>
-                        <stop offset="99.97%" stop-color="#51BCFF" stop-opacity="1"/>
-                    </linearGradient>
-                </defs>
-                
-                <!--
-                    1. 背景暗带 (可选,但符合设计稿fill的语义)
-                    这里画一条高度2px的暗色带,贴着顶部
-                  -->
-                <rect
-                    x="0"
-                    y="0"
-                    width="426"
-                    height="2"
-                    fill="url(#bgGrad)"
-                >
-                </rect>
-                
-                <!--
-                    2. 顶部线条系统: stroke用#51BCFF
-                 -->
-                <!--
-                    2.1 左直线: (0,0.5) -> (60,0.5)
-                    Tips: 因为线是居中的,也就是上下各占0.5px,所以y坐标要+0.5
-                -->
-                <path
-                    d="M0 0.5 H60"
-                    stroke="url(#strokeGrad)"
-                    stroke-width="1"
-                    fill="none"
-                    stroke-linecap="butt"
-                    shape-rendering="crispEdges"
-                />
-                
-                <!--
-                    2.2 fold(3段): 斜下 -> 水平 -> 斜上
-                    (60,0.5) -> (76,16.5) -> (350,16.5) -> (366,0.5)
-                -->
-                <path
-                    d="M60 0.5 L76 16.5 H350 L366 0.5"
-                    stroke="url(#strokeGrad)"
-                    stroke-width="1"
-                    fill="none"
-                    stroke-linecap="butt"
-                    shape-rendering="crispEdges"
-                />
-                
-                <!-- 2.3 右直线: (366,0.5) -> (426,0.5) -->
-                <path
-                    d="M366 0.5 H426"
-                    stroke="url(#strokeGrad)"
-                    stroke-width="1"
-                    fill="none"
-                    stroke-linecap="butt"
-                    shape-rendering="crispEdges"
-                />
-            </svg>
+                    <!--
+                        1. 背景暗带 (可选,但符合设计稿fill的语义)
+                        这里画一条高度2px的暗色带,贴着顶部
+                      -->
+                    <rect
+                            x="0"
+                            y="0"
+                            width="426"
+                            height="2"
+                            fill="url(#bgGradTop)"
+                    >
+                    </rect>
+                    
+                    <!--
+                        2. 顶部线条系统: stroke用#51BCFF
+                     -->
+                    <!--
+                        2.1 左直线: (0,0.5) -> (60,0.5)
+                        Tips: 因为线是居中的,也就是上下各占0.5px,所以y坐标要+0.5
+                    -->
+                    <path
+                            d="M0 0.5 H60"
+                            stroke="url(#strokeGradTop)"
+                            stroke-width="1"
+                            fill="none"
+                            stroke-linecap="butt"
+                            shape-rendering="crispEdges"
+                    />
+                    
+                    <!--
+                        2.2 fold(3段): 右斜下 -> 水平 -> 右斜上
+                        (60,0.5) -> (76,16.5) -> (350,16.5) -> (366,0.5)
+                    -->
+                    <path
+                            d="M60 0.5 L76 16.5 H350 L366 0.5"
+                            stroke="url(#strokeGradTop)"
+                            stroke-width="1"
+                            fill="none"
+                            stroke-linecap="butt"
+                            shape-rendering="crispEdges"
+                    />
+                    
+                    <!-- 2.3 右直线: (366,0.5) -> (426,0.5) -->
+                    <path
+                            d="M366 0.5 H426"
+                            stroke="url(#strokeGradTop)"
+                            stroke-width="1"
+                            fill="none"
+                            stroke-linecap="butt"
+                            shape-rendering="crispEdges"
+                    />
+                </svg>
+            </div>
+            <!-- 顶部线系统结束 -->
+            
+            <!-- 右边框 -->
+            <div class="seg rightBar"></div>
+            
+            <!-- 底部线系统开始 -->
+            <div class="bottomSystem">
+                <!-- SVG: 避开按钮区 -->
+                <svg class="bottomSvg" viewBox="0 0 426 17" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="bgGradBottom" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="426" y2="0">
+                            <stop offset="0%" stop-color="rgb(5,9,18)" stop-opacity="0.90"/>
+                            <stop offset="49.98%" stop-color="rgb(5,9,18)" stop-opacity="0.40"/>
+                            <stop offset="99.97%" stop-color="rgb(5,9,18)" stop-opacity="0.90"/>
+                        </linearGradient>
+                        
+                        <linearGradient id="strokeGradBottom" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="426" y2="0">
+                            <stop offset="0%" stop-color="#51BCFF" stop-opacity="1"/>
+                            <stop offset="49.98%" stop-color="#51BCFF" stop-opacity="0.1"/>
+                            <stop offset="99.97%" stop-color="#51BCFF" stop-opacity="1"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- 1. 底部暗带 (如果设计稿底部也有类似暗带就留着 没有就删) -->
+                    <rect x="0" y="15" width="426" height="2" fill="url(#bgGradBottom)"></rect>
+                    
+                    <!-- 2. 底部线条系统 -->
+                    <!-- 2.1 底边左直线: (0, 16.5) -> (60, 16.5) -->
+                    <path
+                            d="M0 16.5 H60"
+                            stroke="url(#strokeGradBottom)"
+                            stroke-width="1"
+                            fill="none"
+                            stroke-linecap="butt"
+                            shape-rendering="crispEdges"
+                    />
+                    
+                    <!--
+                        2.2 fold(4段): 右斜上 -> 水平 + 水平 -> 右斜下
+                        (60,16.5) -> (76,0.5) -> (140,0.5) + (140,0.5) -> (302,16.5)
+                    -->
+                    <!-- 2.2.1 右斜上 -> 水平: (60,16.5) -> (76,0.5) -> (140,0.5) -->
+                    <path
+                            d="M60 16.5 L76 0.5 H140"
+                            stroke="url(#strokeGradBottom)"
+                            stroke-width="1"
+                            fill="none"
+                            stroke-linecap="butt"
+                            shape-rendering="crispEdges"
+                    />
+                    
+                    <!-- 2.2.2 水平 -> 右斜下: (286,0.5) -> (350, 0.5) -> (366,16.5) -->
+                    <path
+                            d="M286 0.5 H350 L366 16.5"
+                            stroke="url(#strokeGradBottom)"
+                            stroke-width="1"
+                            fill="none"
+                            stroke-linecap="butt"
+                            shape-rendering="crispEdges"
+                    />
+                    
+                    <!-- 2.3 底边右水平线: (366, 16.5) -> (426, 16.5）-->
+                    <path
+                            d="M366 16.5 H426"
+                            stroke="url(#strokeGradBottom)"
+                            stroke-width="1"
+                            fill="none"
+                            stroke-linecap="butt"
+                            shape-rendering="crispEdges"
+                    />
+                </svg>
+            </div>
+            <!-- 底部线系统结束 -->
+            
+            <!-- 左边框轨道区域开始 -->
+            <div class="leftRail">
+                <!-- 左上边框 -->
+                <div class="seg leftTop"></div>
+                <!-- 左中边框 -->
+                <div class="seg leftMid"></div>
+                <!-- 左下边框 -->
+                <div class="seg leftBottom"></div>
+            </div>
+            <!-- 左边框轨道区域结束 -->
         </div>
-        <!-- 上边框容器区域结束 -->
+        <!-- 边框层结束 -->
         
-        <!-- 下边框 -->
-        <div class="seg bottomLine"></div>
-        
-        <!-- 右边框 -->
-        <div class="seg rightBar"></div>
-        
-        <!-- 左边框轨道区域开始 -->
-        <div class="leftRail">
-            <!-- 左上边框 -->
-            <div class="seg leftTop"></div>
-            <!-- 左中边框 -->
-            <div class="seg leftMid"></div>
-            <!-- 左下边框 -->
-            <div class="seg leftBottom"></div>
-        </div>
-        <!-- 左边框轨道区域结束 -->
+        <!-- 内部装饰件层开始 -->
+        <!-- Tips: 这里的内部是指装饰件在裁剪区域内部 -->
+        <div class="innerDecorLayer"></div>
+        <!-- 内部装饰件层结束 -->
     </div>
-    <!-- 边框层结束 -->
+    <!-- 裁剪区域结束 -->
     
-    <!-- 装饰件层开始 -->
-    <div class="decorLayer">
+    <!-- 外部装饰件层开始 -->
+    <!-- Tips: 这里的外部是指装饰件在裁剪区域外部 -->
+    <!-- 外部装饰件层结束 -->
+    <div class="outerDecorLayer">
         <!-- 左侧小矩形开始 -->
         <div class="seg rectangle"></div>
         <!-- 左侧小矩形结束 -->
     </div>
-    <!-- 装饰件层结束 -->
     
     <!-- 内容层开始 -->
     <div class="contentLayer">
@@ -123,6 +199,8 @@
             上下: 1px,右: 6px
             <br/>
         </div>
+        
+        <button class="bottomBtn">See More</button>
     </div>
     <!-- 内容层结束 -->
 </div>

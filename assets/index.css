@@ -21,49 +21,122 @@
 body {
     margin: 0;
     height: 100vh;
-    background: #05070a;
+    /*background: #05070a;*/
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "PingFang SC", "Microsoft YaHei";
     overflow: hidden;
 }
 
 .labelWrap {
+    --wrap-width: var(--w);
+    --wrap-height: var(--h);
+
+    /* 折线相关配置 */
+    /* 折线起点的水平位置 */
+    --notch-start-x: 60px;
+    /* 折线凹口深度 */
+    --notch-depth: 16px;
+    /* 折线斜边水平距离 */
+    /* Tips: run有延伸的意思 */
+    --notch-run-x: 16px;
+    /* 折线中水平线宽度 = warp宽度 - 起点水平位置 * 2 - 折线斜边水平距离 * 2 */
+    --notch-horizontal-width: calc(var(--wrap-width) - var(--notch-start-x) * 2 - var(--notch-run-x) * 2);
+
+    /* 按钮相关配置 */
+    /* 按钮宽度 */
+    --btn-width: 146px;
+    /* 按钮中心点的水平位置 */
+    --btn-center-x: 213px;
+
+    /* 左侧轨道区域相关配置 */
+    /* 左侧轨道宽 */
+    --leftRail-width: 3px;
+    /* 左侧上边框宽 */
+    --leftRail-top-width: 3px;
+    /* 左侧上边框高 */
+    --leftRail-top-height: 162px;
+    /* 左侧中边框宽 */
+    --leftRail-middle-width: 1px;
+    /* 左侧中边框高 */
+    --leftRail-middle-height: 53px;
+    /* 左侧下边框宽 */
+    --leftRail-bottom-width: 3px;
+    /* 左侧下边框高 */
+    --leftRail-bottom-height: 71px;
+}
+
+.labelWrap {
+    position: fixed;
     top: 100px;
     left: 50%;
     transform: translateX(-50%);
-    width: 426px;
-    height: 286px;
-    position: fixed;
+    width: var(--wrap-width);
+    height: var(--wrap-height);
+
+    /* 顶部折线计算 */
+    /* 顶部折线中 左折线结束点的水平位置 = 折线起点的水平位置 + 折线斜边水平距离 */
+    --top-notch-left-diagonal-end-x: calc(var(--notch-start-x) + var(--notch-run-x));
+    /* 顶部折线中 水平线结束点的水平位置 = 顶部折线中水平线宽度 + 左折线结束点的水平位置 */
+    --top-notch-horizontal-end-x: calc(var(--notch-horizontal-width) + var(--top-notch-left-diagonal-end-x));
+    /* 顶部折线中 右折线结束点的水平位置 = 顶部折线中水平线结束位置 + 折线斜边水平距离 */
+    --top-notch-right-diagonal-end-x: calc(var(--top-notch-horizontal-end-x) + var(--notch-run-x));
+
+    /* 底部折线计算 */
+    /* 底部折线中 右侧折线起始点的水平位置 = wrap宽度 - 折线起点的水平位置 */
+    --bottom-notch-right-diagonal-start-x: calc(var(--wrap-width) - var(--notch-start-x));
+    /* 底部折线中 右侧折线结束点的水平位置 = 底部折线中右侧折线起始点的水平位置 - 折线斜边水平距离 */
+    --bottom-notch-right-diagonal-end-x: calc(var(--bottom-notch-right-diagonal-start-x) - var(--notch-run-x));
+    /* 底部折线中 右侧折线结束点的垂直位置 = wrap高度 - 折线深度 */
+    --bottom-notch-right-diagonal-end-y: calc(var(--wrap-height) - var(--notch-depth));
+    /* 底部折线中 水平线结束点的水平位置 = 底部折线中右侧折线结束点的水平位置 - 水平线宽度 */
+    --bottom-notch-horizontal-end-x: calc(var(--bottom-notch-right-diagonal-end-x) - var(--notch-horizontal-width));
+    /* 底部折线中 左侧折线结束点的水平位置 = 底部折线中水平线结束点的水平位置 - 折线斜边水平距离 */
+    --bottom-notch-left-diagonal-end-x: calc(var(--bottom-notch-horizontal-end-x) - var(--notch-run-x));
+
+    /* 左侧塌陷计算 */
+    /* 左侧塌陷开始点的垂直位置 = wrap高度 - 左侧下边框高 */
+    --left-collapse-start-y: calc(var(--wrap-height) - var(--leftRail-bottom-height));
+    /* 左侧塌陷开始点的水平位置 = 左侧轨道宽 - 左侧中边框宽 */
+    --left-collapse-end-x: calc(var(--leftRail-width) - var(--leftRail-middle-width));
+    /* 左侧塌陷结束点的垂直位置 = 左侧塌陷开始点的垂直位置 - 左侧中边框高 */
+    --left-collapse-end-y: calc(var(--left-collapse-start-y) - var(--leftRail-middle-height));
+}
+
+.labelShape {
     background: var(--bg);
-    /* 纯色阶段不做圆角(似乎设计稿里也没有圆角) */
-    border-radius: 0;
     /* 为了观察贴片是否生效给label加一个外边框,后续删除 */
     /*outline: 1px solid rgba(255, 255, 255, 1);*/
-
-    -webkit-clip-path: polygon(
-            0px 0px,          /* 左上 */
-            60px 0px,         /* 到 foldStartX */
-            76px 16px,        /* 左斜下点 (60+16, 16) */
-            350px 16px,       /* 底部水平到 (366-16, 16) */
-            366px 0px,        /* 右斜上回到顶部 */
-            426px 0px,        /* 右上 */
-            426px 286px,      /* 右下 */
-            0px 286px         /* 左下 */
-    );
-
+    /*裁剪*/
+    /* -webkit-clip-path属性的参数是一样的 */
     clip-path: polygon(
-            0px 0px,
-            60px 0px,
-            76px 16px,
-            350px 16px,
-            366px 0px,
-            426px 0px,
-            426px 286px,
-            0px 286px
+        /* 顶部凹口 */
+        0px 0px,        /* 左上 */
+        var(--notch-start-x) 0px,       /* 凹口起点 */
+        var(--top-notch-left-diagonal-end-x) var(--notch-depth),      /* 凹口左斜下点 */
+        var(--top-notch-horizontal-end-x) var(--notch-depth),     /* 底部水平线 */
+        var(--top-notch-right-diagonal-end-x) 0px,      /* 凹口终点 */
+        /* 右上 */
+        var(--wrap-width) 0px,
+        /* 右侧到底部 */
+        var(--wrap-width) var(--wrap-height),
+        /* 底部凹口 */
+        var(--bottom-notch-right-diagonal-start-x) var(--wrap-height),    /* 凹口起点 */
+        var(--bottom-notch-right-diagonal-end-x) var(--bottom-notch-right-diagonal-end-y),    /* 凹口右斜上点 */
+        var(--bottom-notch-horizontal-end-x) var(--bottom-notch-right-diagonal-end-y),     /* 底部水平线 */
+        var(--bottom-notch-left-diagonal-end-x) var(--wrap-height),     /* 凹口终点 */
+        /* 回到底边左端 */
+        0px var(--wrap-height),
+        0px var(--left-collapse-start-y),
+        var(--left-collapse-end-x) var(--left-collapse-start-y),
+        var(--left-collapse-end-x) var(--left-collapse-end-y),
+        0px var(--left-collapse-end-y),
+        0px 0px
     );
 }
 
+.labelShape,
 .borderLayer,
-.decorLayer,
+.innerDecorLayer,
+.outerDecorLayer,
 .contentLayer {
     position: absolute;
     /* inset属性就是top/right/bottom/left的简写 */
@@ -72,17 +145,18 @@ body {
 }
 
 .borderLayer {
-    /* 边框层最靠上,若边框覆盖了内容,则说明该调整内容的padding了 */
+    /* 边框层最靠下 */
     z-index: 10;
 }
 
-.decorLayer {
-    /* 装饰层在边框层下方,可以被边框遮挡,但不可以遮挡内容,若装饰层覆盖了内容,则说明该调整内容的padding了 */
+.innerDecorLayer,
+.outerDecorLayer {
+    /* 装饰层在边框层上方,可以遮挡边框 */
     z-index: 20;
 }
 
 .contentLayer {
-    /* 内容层在最下方,不会被边框和装饰遮挡,若遮挡则调整padding */
+    /* 内容层在最上方,可以遮挡边框和装饰 */
     z-index: 30;
 }
 

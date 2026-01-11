@@ -1,0 +1,8 @@
+.contentLayer .bottomBtn {
+    position: absolute;
+    width: var(--btn-width);
+    left: 140px;  /* 213 - 73 */
+    bottom: 0;
+    height: 32px; /* 先随便给个值，后面按设计稿再精调 */
+    pointer-events: auto;
+}
