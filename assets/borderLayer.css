@@ -1,5 +1,6 @@
 .seg {
     position: absolute;
+    /* TODO: 3. 左侧的上/中/下 3段边框需要分别的颜色渐变 */
     background: var(--border);
 }
 
@@ -34,14 +35,6 @@
     display: block;
     width: 100%;
     height: 100%;
-}
-
-.borderLayer .rightBar {
-    /* Tips: 同理,同时设置了top和bottom,则元素在垂直方向上也会被自动拉伸,此时不要设置height */
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 6px;
 }
 
 .borderLayer .leftRail {

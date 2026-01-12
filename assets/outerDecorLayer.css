@@ -5,3 +5,30 @@
     width: 4px;
     height: 7px;
 }
+
+.outerDecorLayer .rightTrapezoid {
+    position: absolute;
+    /* TODO: 4. 需要这个梯形的渐变 */
+    background: var(--border);
+    top: 0;
+    /* 右侧梯形需要完全盖住6px的右边框 */
+    right: -14px;
+    width: 14px;
+    height: 123px;
+    /* TODO: 5. 这里的裁剪也是手动测量的,需要调整 */
+    clip-path: polygon(
+        0px 0px,
+        14px 15px,
+        14px 108px,
+        0px 123px
+    );
+}
+
+.outerDecorLayer .rightBar {
+    position: absolute;
+    background: var(--border);
+    top: 110px;
+    right: -6px;
+    bottom: 0;
+    width: 6px;
+}
