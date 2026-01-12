@@ -194,6 +194,10 @@
         <!-- 右边框开始 -->
         <div class="rightBar"></div>
         <!-- 右边框结束 -->
+        
+        <!-- 斜纹条开始 -->
+        <div class="stripeChip"></div>
+        <!-- 斜纹条结束 -->
     </div>
     
     <!-- 内容层开始 -->
@@ -210,7 +214,15 @@
             <br/>
         </div>
         
-        <button class="bottomBtn">See More</button>
+        <!-- 底部按钮区域开始 -->
+        <!--
+            Tips: 这里要用一层容器包裹按钮,因为按钮会被裁剪,但按钮同时又有鼠标悬停时的外发光效果,
+            所以要把外发光效果做到容器上,再裁剪按钮,外发光才能正常显示
+        -->
+        <div class="buttonWrap">
+            <button class="bottomButton">See More</button>
+        </div>
+        <!-- 底部按钮区域结束 -->
     </div>
     <!-- 内容层结束 -->
 </div>

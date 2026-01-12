@@ -32,3 +32,20 @@
     bottom: 0;
     width: 6px;
 }
+
+.outerDecorLayer .stripeChip {
+    position: absolute;
+    /* TODO: 6. 这里的位置我在设计稿中没有找到,是我自己根据网页效果给的,可能不对,需要和UI确认 */
+    top: 8px;
+    right: 80px;
+    width: 90px;
+    height: 6px;
+    /* TODO: 7. 这个线性重复渐变实在是没法实现成和UI效果图里一样的了 */
+    background: repeating-linear-gradient(
+            -40deg,
+            transparent 0,
+            transparent 1.2px,
+            var(--border) 1.2px,
+            var(--border) 9.64px
+    );
+}

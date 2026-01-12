@@ -11,11 +11,39 @@
     pointer-events: none;
 }
 
-.contentLayer .bottomBtn {
+.contentLayer .buttonWrap {
+    display: inline-block;
     position: absolute;
-    width: var(--btn-width);
     left: calc(var(--btn-center-x) - var(--btn-width) / 2);
     bottom: 0;
-    height: 32px; /* 先随便给个值，后面按设计稿再精调 */
+    transition: 0.2s;
+}
+
+.contentLayer .buttonWrap:hover {
+    filter: drop-shadow(0 0 20px #5BDCFF);
+}
+
+.contentLayer .bottomButton {
+    width: var(--btn-width);
+    outline: none;
+    border: none;
+    height: 32px;
     pointer-events: auto;
+    background-image: linear-gradient(to right, #21AAFF, #2CFBFF);
+    color: white;
+    clip-path: polygon(
+        0 16px,
+        13px 0,
+        132px 0,
+        145px 16px,
+        132px 32px,
+        13px 32px,
+        0 16px
+    );
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 1px;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
