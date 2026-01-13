@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Universe Label</title>
+    <style>
+        /*
+            Tips: 由于首屏加载时会出现FOUC(Flash of Unstyled Content,样式未加载时的闪烁),
+            因为页面第一次渲染时,浏览器会先加载HTML结构,然后才执行JS,将CSS注入到style标签中,
+            所以首屏会按无样式渲染1帧,等JS运行后注入CSS再隐藏labelWrap.所以写一份隐藏的样式在HTML中,
+            避免FOUC问题.
+        */
+        .labelWrap {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
+<div class="control"></div>
+
 <div class="labelWrap">
     <!-- 裁剪区域开始 -->
     <div class="labelShape">
@@ -202,17 +217,17 @@
     
     <!-- 内容层开始 -->
     <div class="contentLayer">
-        <!-- 占位内容 用于观察padding和边框遮挡关系 -->
+        <!-- 内容区域开始 -->
         <div class="content">
-            <b>Layer B</b>: 只做边框骨架(6个贴片)
-            <br/>
-            尺寸: 426 * 286
-            <br/>
-            左边: 3px(0-162) / 1px(162-215) / 3px(215-286)
-            <br/>
-            上下: 1px,右: 6px
-            <br/>
+            <h2>网络安全管理</h2>
+            <div class="cutOffLine"></div>
+            <p>
+                150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内容.
+                150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内容.
+                150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内容.150字之内的内
+            </p>
         </div>
+        <!-- 内容区域结束 -->
         
         <!-- 底部按钮区域开始 -->
         <!--

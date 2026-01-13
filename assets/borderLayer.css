@@ -1,3 +1,10 @@
+.borderLayer {
+    position: absolute;
+    inset: 0;
+    /* 边框层最靠下 */
+    z-index: 10;
+}
+
 .seg {
     position: absolute;
     /* TODO: 3. 左侧的上/中/下 3段边框需要分别的颜色渐变 */

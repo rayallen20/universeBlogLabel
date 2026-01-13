@@ -1,3 +1,10 @@
+.innerDecorLayer {
+    position: absolute;
+    inset: 0;
+    /* 装饰层在边框层上方,可以遮挡边框 */
+    z-index: 20;
+}
+
 .innerDecorLayer .leftTrapezoid {
     position: absolute;
     top: 26px;

@@ -1,4 +1,6 @@
 import "../assets/index.css"
+import "../assets/font.css"
+import "../assets/labelWrap.css"
 import "../assets/labelShape.css"
 import "../assets/borderLayer.css"
 import "../assets/innerDecorLayer.css"
